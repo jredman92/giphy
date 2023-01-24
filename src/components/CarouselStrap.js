@@ -2,7 +2,7 @@ import { Carousel } from "react-bootstrap";
 
 function CarouselStrap(props) {
   const propImages = props.images;
-  console.log(props);
+  console.log("These are my props", props);
   console.log(`Carousel Images:`, propImages);
 
   return (

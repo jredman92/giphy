@@ -1,31 +1,28 @@
-import logo from "./logo.svg";
+import Navi from "./partials/Navi";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import CarouselStrap from "./components/CarouselStrap";
+import HomePage from "./components/pages/HomePage";
+import AboutPage from "./components/pages/AboutPage";
+import RegisterPage from "./components/pages/RegisterPage";
+import LoginPage from "./components/pages/LoginPage";
+import GifSearchPage from "./components/pages/GifSearchPage";
+import GifSavePage from "./components/pages/GifSavePage";
 
 function App() {
-  const apiKey = "yYpIWOaoTUEBYsCbi8cCQy76FSqz6FdL";
-  const [homeImages, setHomeImages] = useState([]);
-
-  useEffect(() => {
-    getImages();
-  }, []);
-
-  async function getImages() {
-    const res = await axios.get(
-      `https://api.giphy.com/v1/gifs/trending?&api_key=${apiKey}&rating=g&limit=5`
-    );
-    setHomeImages(res.data.data);
-  }
-
   return (
     <div className="App">
-      <h1>Giphy App</h1>
-      <div className="app"></div>
-      <div className="container">
-        <CarouselStrap images={homeImages} />
-      </div>
+      <Router>
+        <Navi />
+        <Routes>
+          {/* index = /  reddit.com */}
+          <Route index element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/gifs/search" element={<GifSearchPage />} />
+          <Route path="/gifs/saved" element={<GifSavePage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
